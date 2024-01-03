@@ -1,3 +1,42 @@
+//header
+export const headerMoviesLinks = [
+  { link: "#", text: "Release Calendar" },
+  { link: "#", text: "Top 250 Movies" },
+  { link: "#", text: "Most Popular Movies" },
+  { link: "#", text: "Browse Movies by Genre" },
+  { link: "#", text: "Top Box Office" },
+  { link: "#", text: "Showtime Tickets" },
+  { link: "#", text: "Movie News" },
+  { link: "#", text: "India Movie Spotlight" },
+];
+export const headerShowsLinks = [
+  { link: "#", text: "What's on TV & Streaming" },
+  { link: "#", text: "Top 250 TV Shows" },
+  { link: "#", text: "Most Popular TV Shows" },
+  { link: "#", text: "Browse TV Shows by Genre" },
+  { link: "#", text: "TV News" },
+];
+export const headerWatchLinks = [
+  { link: "#", text: "What to Watch" },
+  { link: "#", text: "Latest Trailers" },
+  { link: "#", text: "IMDb Originals" },
+  { link: "#", text: "IMDb Picks" },
+  { link: "#", text: "IMDb Podcasts" },
+];
+export const headerAwardsLinks = [
+  { link: "#", text: "Oscars" },
+  { link: "#", text: "Emmys" },
+  { link: "#", text: "Halloween Picks" },
+  { link: "#", text: "Scary Good Horror" },
+  { link: "#", text: "Hispanic Heritage Month" },
+  { link: "#", text: "MAMI" },
+  { link: "#", text: "STARmeter Awards" },
+  { link: "#", text: "Award Central" },
+  { link: "#", text: "Festival Central" },
+  { link: "#", text: "All Events" },
+];
+
+// footer
 export const footerLinks = [
   { text: "Get the IMDb App", link: "https://slyb.app.link/SKdyQ6A449" },
   { text: "Help", link: "https://help.imdb.com/imdb" },

@@ -70,7 +70,7 @@ export default function Footer() {
       </div>
       <div className="py-1.5 text-center">
         <p className="text-xs text-primary/70 tracking-wide">
-          © 1990-2023 by IMDb.com, Inc.
+          © 1990-{new Date().getFullYear()} by IMDb.com, Inc.
         </p>
       </div>
     </div>
