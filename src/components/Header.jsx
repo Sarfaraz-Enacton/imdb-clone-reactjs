@@ -13,6 +13,7 @@ import {
   headerShowsLinks,
   headerWatchLinks,
 } from "../utils/constant";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [navExpanded, setNavExpanded] = useState(false);
@@ -26,7 +27,13 @@ export default function Header() {
         <div className="max-w-[1024px] mx-auto px-4">
           <div className="flex justify-between">
             <div className="w-24">
-              <img className="w-full h-auto" src="/logo.svg" alt="" />
+              <img
+                className="w-full h-auto"
+                src="/logo.svg"
+                alt=""
+                width={64}
+                height={32}
+              />
             </div>
             <button
               onClick={() => setNavExpanded(false)}
@@ -151,10 +158,15 @@ export default function Header() {
       <div className="py-3 bg-secondary-250">
         <nav className="container">
           <div className="flex gap-2 text-sm font-medium">
-            <a href="/" className="block w-16 h-8 flex-shrink-0">
-              <img className="w-full h-auto" src="/logo.svg" alt="" />
-            </a>
-            {/* <Link to="/">Home</Link> */}
+            <Link to="/" className="block w-16 h-8 flex-shrink-0">
+              <img
+                className="w-full h-auto"
+                src="/logo.svg"
+                alt=""
+                width={64}
+                height={32}
+              />
+            </Link>
             <button
               className="hidden items-center gap-1 px-3 rounded cursor-pointer hover:bg-primary/20 lg:flex"
               onClick={() => setNavExpanded(!navExpanded)}

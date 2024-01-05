@@ -65,8 +65,14 @@ export default function Footer() {
           </a>
         ))}
       </div>
-      <div className="flex items-center justify-center py-4">
-        <img className="py-2" src="/amazon-logo.svg" alt="" />
+      <div className="flex items-center justify-center py-6">
+        <img
+          className="max-h-[18px]"
+          src="/amazon-logo.svg"
+          alt=""
+          height={18}
+          width={160}
+        />
       </div>
       <div className="py-1.5 text-center">
         <p className="text-xs text-primary/70 tracking-wide">

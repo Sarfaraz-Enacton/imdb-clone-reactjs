@@ -5,3 +5,49 @@
 body {
   @apply bg-secondary text-white;
 }
+button {
+  @apply transition ease-in-out duration-200;
+}
+
+.inset-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px; /* Adjust the height of the shadow */
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.01),
+    rgba(0, 0, 0, 0.9)
+  );
+  box-shadow: inset 0px -94px 90px -61px rgba(0, 0, 0, 0.9);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+}
+@media screen and (max-width: 767px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    padding: 32px 25px !important;
+    border: 1px solid white;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+    --swiper-navigation-size: 25px;
+    --swiper-navigation-top-offset: 40%;
+    --swiper-navigation-sides-offset: 0px;
+    --swiper-navigation-color: white;
+  }
+}
+.swiper-lazy-preloader {
+  border: 4px solid #f5c518 !important;
+  border-top: 4px solid transparent !important;
+}
