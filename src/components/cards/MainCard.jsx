@@ -1,9 +1,11 @@
 import React from "react";
 import { config } from "../../config";
+import { Link } from "react-router-dom";
 
 export default function MainCard({ data }) {
+  console.log(data);
   return (
-    <div className="swiper-slide">
+    <Link to={`/preview/${data.id}`} className="d-block w-full">
       <div className="rounded overflow-hidden">
         <div className="w-full min-h-[250px] relative">
           <img
@@ -67,6 +69,6 @@ export default function MainCard({ data }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

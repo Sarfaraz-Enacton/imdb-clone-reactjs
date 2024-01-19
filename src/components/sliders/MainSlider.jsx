@@ -34,10 +34,10 @@ export default function MainSlider({ data }) {
           slidesPerGroup: 6,
         },
       }}
-      autoplay={{
-        delay: 7000,
-        disableOnInteraction: false,
-      }}
+      // autoplay={{
+      //   delay: 7000,
+      //   disableOnInteraction: false,
+      // }}
     >
       {data.map((item, index) => (
         <SwiperSlide key={index}>
