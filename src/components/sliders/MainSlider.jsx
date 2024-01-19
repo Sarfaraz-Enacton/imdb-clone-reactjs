@@ -11,7 +11,6 @@ export default function MainSlider({ data }) {
       modules={[Navigation, Autoplay]}
       navigation={true}
       loop={true}
-      //   slidesPerView={6}
       spaceBetween={24}
       breakpoints={{
         0: {
@@ -39,8 +38,6 @@ export default function MainSlider({ data }) {
         delay: 7000,
         disableOnInteraction: false,
       }}
-      // onSlideChange={() => console.log("slide change")}
-      // onSwiper={(swiper) => console.log(swiper)}
     >
       {data.map((item, index) => (
         <SwiperSlide key={index}>

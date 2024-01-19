@@ -5,17 +5,24 @@ import FetchApi from "../components/FetchApi";
 import UpcomingCard from "../components/cards/UpcomingCard";
 import MainCard from "../components/cards/MainCard";
 import MainSlider from "../components/sliders/MainSlider";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 export default function Home() {
-  // Hero Slider api
-  const urlHero = `${config.API_BASE_URL}/trending/all/day${config.API_PARAMS}`;
-  const { data: data1, loading: loading1, error: error1 } = FetchApi(urlHero);
-  const urlUpcoming = `${config.API_BASE_URL}/movie/upcoming${config.API_PARAMS}`;
+  const fetchFromApi = (endpoint) => {
+    const url = `${config.API_BASE_URL}${endpoint}`;
+    console.log(url);
+    return FetchApi(url);
+  };
+  const {
+    data: data1,
+    loading: loading1,
+    error: error1,
+  } = fetchFromApi(`trending/all/day${config.API_Query_PARAMS_HERO}`);
   const {
     data: data2,
     loading: loading2,
     error: error2,
-  } = FetchApi(urlUpcoming);
+  } = fetchFromApi(`movie/upcoming${config.API_Query_PARAMS_HERO}`);
   const urlTopShow = `${config.API_BASE_URL}/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`;
   const {
     data: data3,
@@ -35,17 +42,22 @@ export default function Home() {
         <div className="flex flex-col gap-6 lg:flex-row lg:gap-3">
           <div className="max-w-[825px]ss w-full lg:w-4/6">
             {loading1 && (
-              <div className="w-full h-[350px] sm:h-[600px] flex items-center justify-center gap-2">
-                <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-                <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-                <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-              </div>
+              <SkeletonLoader
+                variant="primary"
+                primaryCustomClass="h-[350px] sm:h-[600px]"
+              />
             )}
             <HeroSlider data={data1} />
           </div>
           <div className="w-full lg:w-2/6 space-y-6">
             <h3 className="text-xl text-yellow font-semibold">Up next</h3>
             <div className="p-4 space-y-4">
+              {loading2 && (
+                <SkeletonLoader
+                  variant="secondary"
+                  secondaryCustomClass={"w-full h-[450px] lg:h-[550px]"}
+                />
+              )}
               {loading2 && (
                 <div className="w-full h-[450px] lg:h-[550px] flex items-center justify-center gap-2">
                   <div className="border-yellow h-12 w-12 animate-spin rounded-full border-4 border-t-transparent"></div>
@@ -83,12 +95,9 @@ export default function Home() {
         </div>
         <div className="pt-6">
           {loading3 && (
-            <div className="w-full h-[450px] flex items-center justify-center gap-2">
-              <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-              <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-              <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-            </div>
+            <SkeletonLoader variant="primary" primaryCustomClass="h-[450px]" />
           )}
+
           <MainSlider data={data3} />
         </div>
       </section>
@@ -116,11 +125,7 @@ export default function Home() {
         </div>
         <div className="pt-6">
           {loading4 && (
-            <div className="w-full h-[450px] flex items-center justify-center gap-2">
-              <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-              <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-              <div className="w-4 sm:w-6 h-4 sm:h-6 rounded-full animate-pulse bg-yellow"></div>
-            </div>
+            <SkeletonLoader variant="primary" primaryCustomClass="h-[450px]" />
           )}
           <MainSlider data={data4} />
         </div>
