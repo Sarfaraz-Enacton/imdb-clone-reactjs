@@ -5,7 +5,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function MainSlider({ data }) {
+export default function MainSlider({ data, type }) {
   return (
     <Swiper
       modules={[Navigation, Autoplay]}
@@ -41,7 +41,7 @@ export default function MainSlider({ data }) {
     >
       {data.map((item, index) => (
         <SwiperSlide key={index}>
-          <MainCard data={item} />
+          <MainCard data={item} type={type} />
         </SwiperSlide>
       ))}
     </Swiper>

@@ -98,7 +98,7 @@ export default function Home() {
             <SkeletonLoader variant="primary" primaryCustomClass="h-[450px]" />
           )}
 
-          <MainSlider data={data3} />
+          <MainSlider data={data3} type="tv" />
         </div>
       </section>
 
@@ -127,7 +127,7 @@ export default function Home() {
           {loading4 && (
             <SkeletonLoader variant="primary" primaryCustomClass="h-[450px]" />
           )}
-          <MainSlider data={data4} />
+          <MainSlider data={data4} type="movie" />
         </div>
       </section>
     </main>

@@ -5,7 +5,7 @@ export default function FetchApi(url) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(url);
+  // console.log(url);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +19,7 @@ export default function FetchApi(url) {
 
         const response = await fetch(url, options);
         const json = await response.json();
-        console.log(json);
+        // console.log(json);
         const data = json.results || json;
         setData(data);
         // console.log(data);

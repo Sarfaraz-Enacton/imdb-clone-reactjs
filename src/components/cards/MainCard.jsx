@@ -2,10 +2,10 @@ import React from "react";
 import { config } from "../../config";
 import { Link } from "react-router-dom";
 
-export default function MainCard({ data }) {
-  console.log(data);
+export default function MainCard({ data, type }) {
+  // console.log(type);
   return (
-    <Link to={`/preview/${data.id}`} className="d-block w-full">
+    <Link to={`/preview/${type}/${data.id}`} className="d-block w-full">
       <div className="rounded overflow-hidden">
         <div className="w-full min-h-[250px] relative">
           <img
