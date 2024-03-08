@@ -10,7 +10,7 @@ import SkeletonLoader from "../components/SkeletonLoader";
 export default function Home() {
   const fetchFromApi = (endpoint) => {
     const url = `${config.API_BASE_URL}${endpoint}`;
-    console.log(url);
+    // console.log(url);
     return FetchApi(url);
   };
   const {

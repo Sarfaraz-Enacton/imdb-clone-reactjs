@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function MainCard({ data, type }) {
   // console.log(type);
   return (
-    <Link to={`/preview/${type}/${data.id}`} className="d-block w-full">
+    <Link to={`/preview/${data.id}?type=${type}`} className="d-block w-full">
       <div className="rounded overflow-hidden">
         <div className="w-full min-h-[250px] relative">
           <img
