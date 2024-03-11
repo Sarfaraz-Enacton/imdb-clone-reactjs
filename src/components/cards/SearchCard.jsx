@@ -2,10 +2,10 @@ import React from "react";
 import { config } from "../../config";
 import { Link } from "react-router-dom";
 
-export default function SearchCard({ data }) {
-  console.log(data);
+export default function SearchCard({ data, onClick }) {
+  // console.log(data);
   return (
-    <Link to={`/preview/${data.id}?type=${data.media_type}`}>
+    <Link to={`/preview/${data.id}?type=${data.media_type}`} onClick={onClick}>
       <div className="p-2 flex gap-4 hover:bg-secondary-100 transition ease-in-out duration-200 hover:cursor-pointer">
         <div className="max-w-[48px] relative">
           <img

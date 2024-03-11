@@ -3,9 +3,12 @@ import { DropdownIcon, SearchIcon } from "./icons";
 import FetchApi from "./FetchApi";
 import { config } from "../config";
 import SearchCard from "./cards/SearchCard";
+import SkeletonLoader from "./SkeletonLoader";
+import { debounce } from "../utils/constant";
 
 export default function HeaderSearch() {
   const [searchInput, setSearchInput] = useState("");
+
   const {
     data: searchData,
     loading,
@@ -13,6 +16,16 @@ export default function HeaderSearch() {
   } = FetchApi(
     `${config.API_BASE_URL}/search/multi?query=${searchInput}&page=1`
   );
+  const delayedSearch = debounce((value) => {
+    setSearchInput(value);
+  }, 500);
+  const handleInput = (e) => {
+    const { value } = e.target;
+    delayedSearch(value);
+  };
+  const handleSearchResultClick = () => {
+    setSearchInput("");
+  };
 
   return (
     <div className="relative w-full">
@@ -56,7 +69,7 @@ export default function HeaderSearch() {
             className="w-full h-full outline-none bg-primary px-3 caret-secondary text-secondary"
             type="text"
             placeholder="Search IMDb"
-            onChange={(e) => setSearchInput(e.target.value)}
+            onChange={handleInput}
           />
         </div>
         <button className="bg-primary text-secondary px-2 rounded-r">
@@ -72,8 +85,9 @@ export default function HeaderSearch() {
       </div>
       {searchInput.length > 2 && searchData && (
         <div className="absolute right-0 left-0 top-8 mt-2 origin-top-right z-10 bg-secondary-300 py-2 rounded w-full divide-y-[1px] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-1 transition-opacity">
+          {loading && <SkeletonLoader variant="primary" />}
           {searchData.slice(0, 7).map((item, i) => (
-            <SearchCard data={item} key={i} />
+            <SearchCard data={item} key={i} onClick={handleSearchResultClick} />
           ))}
         </div>
       )}

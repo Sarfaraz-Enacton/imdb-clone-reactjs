@@ -38,7 +38,7 @@ export default function Preview() {
               <SkeletonLoader variant="primary" primaryCustomClass="h-screen" />
             </div>
           ) : media_type === "person" ? (
-            <div className="">test</div>
+            <div className="h-[50vh]">Not much data available</div>
           ) : (
             <div className="space-y-4">
               <h1 className="text-2xl md:text-4xl xl:text-5xl">
@@ -50,7 +50,7 @@ export default function Preview() {
                     className="w-full h-full object-cover"
                     src={
                       data.poster_path
-                        ? config.IMG_BASE_URL + data.poster_path
+                        ? config.IMG_BASE_URL + data?.poster_path
                         : noImagePlaceholder
                     }
                     alt={data.title || data.name}
