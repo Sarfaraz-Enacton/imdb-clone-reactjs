@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FromError from "../components/FromError";
+import SignInWithGoogle from "../components/SignInWithGoogle";
 
 export default function SignIn() {
   const SignInSchema = Yup.object().shape({
@@ -22,6 +23,7 @@ export default function SignIn() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
   return (
     <main className="min-h-[calc(100vh-56px-274px)] flex items-center justify-center">
       <div className="container">
@@ -68,6 +70,7 @@ export default function SignIn() {
               </button>
             </div>
           </form>
+          <SignInWithGoogle customClass="mt-5" />
           <div className="text-center py-4">
             <p className="text-sm font-medium">
               Don't have an account?{" "}
