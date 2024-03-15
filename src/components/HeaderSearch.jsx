@@ -83,12 +83,26 @@ export default function HeaderSearch() {
           </div>
         </div>
       </div>
-      {searchInput.length > 2 && searchData && (
+      {searchInput.length > 2 && !error && (
         <div className="absolute right-0 left-0 top-8 mt-2 origin-top-right z-10 bg-secondary-300 py-2 rounded w-full divide-y-[1px] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-1 transition-opacity">
-          {loading && <SkeletonLoader variant="primary" />}
-          {searchData.slice(0, 7).map((item, i) => (
-            <SearchCard data={item} key={i} onClick={handleSearchResultClick} />
-          ))}
+          {loading ? (
+            <SkeletonLoader variant="primary" />
+          ) : (
+            searchData
+              ?.slice(0, 7)
+              .map((item, i) => (
+                <SearchCard
+                  data={item}
+                  key={i}
+                  onClick={handleSearchResultClick}
+                />
+              ))
+          )}
+        </div>
+      )}
+      {error && (
+        <div className="">
+          <p>An error occurred while fetching data.</p>
         </div>
       )}
     </div>

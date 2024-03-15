@@ -183,9 +183,12 @@ export default function Header() {
             <WatchListIcon />
             <span>Watchlist</span>
           </button>
-          <button className="hidden items-center px-3 rounded cursor-pointer hover:bg-primary/20 flex-shrink-0 sm:flex">
+          <Link
+            to="/sign-in"
+            className="hidden items-center px-3 rounded cursor-pointer hover:bg-primary/20 flex-shrink-0 sm:flex"
+          >
             Sign In
-          </button>
+          </Link>
           <button className="hidden items-center px-3 rounded cursor-pointer hover:bg-primary/20 lg:flex">
             EN
           </button>
