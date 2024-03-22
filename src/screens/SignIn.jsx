@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../components/Input";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FromError from "../components/FromError";
 import SignInWithGoogle from "../components/SignInWithGoogle";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { toast } from "react-toastify";
 
 export default function SignIn() {
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const SignInSchema = Yup.object().shape({
     email: Yup.string().required("enter your email"),
     password: Yup.string()
@@ -19,8 +24,40 @@ export default function SignIn() {
       password: "",
     },
     validationSchema: SignInSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        const userCredentials = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        console.log(userCredentials.user);
+      } catch (error) {
+        alert("invalid credentials");
+        const errorMessage = error.message;
+        const errorCode = error.code;
+        setError(true);
+        console.log(errorCode);
+
+        switch (errorCode) {
+          case "auth/invalid-email":
+            setErrorMessage("Invalid email.");
+            toast("Invalid email.");
+            break;
+          case "auth/user-disabled":
+            setErrorMessage("Disabled email");
+            break;
+          case "auth/user-not-found":
+            setErrorMessage("User not found");
+            break;
+          case "auth/wrong-password":
+            setErrorMessage("Wrong password");
+            break;
+          default:
+            setErrorMessage("something went wrong");
+            break;
+        }
+      }
     },
   });
 
@@ -70,7 +107,7 @@ export default function SignIn() {
               </button>
             </div>
           </form>
-          <SignInWithGoogle customClass="mt-5" />
+          {/* <SignInWithGoogle customClass="mt-5" /> */}
           <div className="text-center py-4">
             <p className="text-sm font-medium">
               Don't have an account?{" "}
