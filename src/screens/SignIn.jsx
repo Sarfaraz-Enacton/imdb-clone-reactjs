@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "../components/Input";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, redirect, useNavigation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FromError from "../components/FromError";
@@ -8,10 +8,15 @@ import SignInWithGoogle from "../components/SignInWithGoogle";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
+import { userAtom } from "../utils/constant";
 
 export default function SignIn() {
+  const [user, setUser] = useRecoilState(userAtom);
+  console.log(user);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  // const navigate = useNavigation();
   const SignInSchema = Yup.object().shape({
     email: Yup.string().required("enter your email"),
     password: Yup.string()
@@ -31,7 +36,16 @@ export default function SignIn() {
           values.email,
           values.password
         );
-        console.log(userCredentials.user);
+        const { uid } = userCredentials.user;
+        localStorage.setItem("user.uid", uid);
+        const userId = localStorage.getItem("user.uid");
+        console.log(userId);
+        setUser(userId);
+        console.log(user);
+        // window.location.href = window.location.origin;
+        // navigate("/");
+        // toast("Sign in successfully");
+        return redirect("/");
       } catch (error) {
         alert("invalid credentials");
         const errorMessage = error.message;
@@ -78,7 +92,8 @@ export default function SignIn() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
-                  autoComplete="username"
+                  // autoComplete="username"
+                  autoComplete="on"
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <FromError message={formik.errors.email} />
@@ -92,7 +107,8 @@ export default function SignIn() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
-                  autoComplete="current-password"
+                  // autoComplete="current-password"
+                  autoComplete="on"
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <FromError message={formik.errors.password} />

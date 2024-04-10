@@ -1,3 +1,5 @@
+import { atom } from "recoil";
+
 //header
 export const headerMoviesLinks = [
   { link: "#", text: "Release Calendar" },
@@ -98,3 +100,9 @@ export const debounce = (callback, wait) => {
     }, wait);
   };
 };
+
+
+export const userAtom  = atom({
+  key: "user",
+  default: null,
+});

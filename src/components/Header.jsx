@@ -12,12 +12,29 @@ import {
   headerMoviesLinks,
   headerShowsLinks,
   headerWatchLinks,
+  userAtom,
 } from "../utils/constant";
 import { Link } from "react-router-dom";
 import HeaderSearch from "./headerSearch";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export default function Header() {
   const [navExpanded, setNavExpanded] = useState(false);
+  const [user, setUser] = useRecoilState(userAtom);
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("sign out successful");
+        setUser(null);
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
   const NavMenuPc = () => {
     return (
       <div
@@ -154,6 +171,27 @@ export default function Header() {
       </div>
     );
   };
+  const SignInButton = () => {
+    return (
+      <Link
+        to="/sign-in"
+        className="flex items-center gap-1 px-3 rounded cursor-pointer hover:bg-primary/20 whitespace-nowrap"
+      >
+        <span>Sign In</span>
+      </Link>
+    );
+  };
+  const SignOutButton = () => {
+    return (
+      <button
+        onClick={handleSignOut}
+        className="flex items-center gap-1 px-3 rounded cursor-pointer hover:bg-primary/20 whitespace-nowrap"
+      >
+        <span>Log Out</span>
+      </button>
+    );
+  };
+  // console.log(user);
   return (
     <header className="py-3 bg-secondary-250">
       <nav className="container">
@@ -183,12 +221,7 @@ export default function Header() {
             <WatchListIcon />
             <span>Watchlist</span>
           </button>
-          <Link
-            to="/sign-in"
-            className="hidden items-center px-3 rounded cursor-pointer hover:bg-primary/20 flex-shrink-0 sm:flex"
-          >
-            Sign In
-          </Link>
+          {!user ? <SignInButton /> : <SignOutButton />}
           <button className="hidden items-center px-3 rounded cursor-pointer hover:bg-primary/20 lg:flex">
             EN
           </button>

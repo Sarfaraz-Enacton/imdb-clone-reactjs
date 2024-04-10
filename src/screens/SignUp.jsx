@@ -3,6 +3,8 @@ import Input from "../components/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import FromError from "../components/FromError";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export default function SignUp() {
   const SignUp = Yup.object().shape({
@@ -31,8 +33,30 @@ export default function SignUp() {
       confirmPassword: "",
     },
     validationSchema: SignUp,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      // alert(JSON.stringify(values, null, 2));
+      try {
+        const userCredentials = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.confirmPassword
+        );
+        const user = userCredentials.user;
+        console.log(user);
+        resetForm();
+      } catch (error) {
+        console.log(error.message);
+        const errorCode = error.code;
+        switch (errorCode) {
+          case "auth/email-already-in-use":
+            setErrorMessage("email already in use");
+            toast("email already in use");
+            break;
+          default:
+            setErrorMessage("something went wrong");
+            break;
+        }
+      }
     },
   });
   return (
@@ -80,6 +104,7 @@ export default function SignUp() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
+                  autoComplete="on"
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <FromError message={formik.errors.email} />
@@ -93,6 +118,7 @@ export default function SignUp() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
+                  autoComplete="on"
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <FromError message={formik.errors.password} />
@@ -106,6 +132,7 @@ export default function SignUp() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.confirmPassword}
+                  autoComplete="on"
                 />
                 {formik.touched.confirmPassword &&
                 formik.errors.confirmPassword ? (
