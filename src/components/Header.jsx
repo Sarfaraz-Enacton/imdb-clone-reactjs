@@ -1,38 +1,31 @@
-import React, { useState } from "react";
-import {
-  CloseIcon,
-  DropdownIcon,
-  IMDbPro,
-  MenuIcon,
-  SearchIcon,
-  WatchListIcon,
-} from "./icons";
+import { useState } from "react";
+import { CloseIcon, IMDbPro, MenuIcon, WatchListIcon } from "./icons";
 import {
   headerAwardsLinks,
   headerMoviesLinks,
   headerShowsLinks,
   headerWatchLinks,
-  userAtom,
 } from "../utils/constant";
 import { Link } from "react-router-dom";
 import HeaderSearch from "./headerSearch";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import { toast } from "react-toastify";
+import useIsLoggedIn from "../utils/hooks/user-status";
 
 export default function Header() {
   const [navExpanded, setNavExpanded] = useState(false);
-  const [user, setUser] = useRecoilState(userAtom);
+  const { isLoggedIn } = useIsLoggedIn();
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        console.log("sign out successful");
-        setUser(null);
+        toast.success("sign out successful");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
       })
       .catch((error) => {
-        // An error happened.
-        console.log(error);
+        toast.error(error.message);
       });
   };
   const NavMenuPc = () => {
@@ -191,7 +184,6 @@ export default function Header() {
       </button>
     );
   };
-  // console.log(user);
   return (
     <header className="py-3 bg-secondary-250">
       <nav className="container">
@@ -221,7 +213,7 @@ export default function Header() {
             <WatchListIcon />
             <span>Watchlist</span>
           </button>
-          {!user ? <SignInButton /> : <SignOutButton />}
+          {isLoggedIn ? <SignOutButton /> : <SignInButton />}
           <button className="hidden items-center px-3 rounded cursor-pointer hover:bg-primary/20 lg:flex">
             EN
           </button>

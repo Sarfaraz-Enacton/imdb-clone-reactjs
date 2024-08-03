@@ -1,22 +1,14 @@
-import React, { useState } from "react";
 import Input from "../components/Input";
-import { Link, Navigate, redirect, useNavigation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FromError from "../components/FromError";
-import SignInWithGoogle from "../components/SignInWithGoogle";
+// import SignInWithGoogle from "../components/SignInWithGoogle";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-import { useRecoilState } from "recoil";
-import { userAtom } from "../utils/constant";
 
 export default function SignIn() {
-  const [user, setUser] = useRecoilState(userAtom);
-  console.log(user);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  // const navigate = useNavigation();
   const SignInSchema = Yup.object().shape({
     email: Yup.string().required("enter your email"),
     password: Yup.string()
@@ -40,35 +32,33 @@ export default function SignIn() {
         localStorage.setItem("user.uid", uid);
         const userId = localStorage.getItem("user.uid");
         console.log(userId);
-        setUser(userId);
-        console.log(user);
-        // window.location.href = window.location.origin;
-        // navigate("/");
-        // toast("Sign in successfully");
-        return redirect("/");
+        toast.success("Sign in successfully");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
       } catch (error) {
-        alert("invalid credentials");
-        const errorMessage = error.message;
         const errorCode = error.code;
-        setError(true);
         console.log(errorCode);
-
+        console.log(error);
         switch (errorCode) {
+          case "auth/invalid-credential":
+            toast.error("enter corret email and password");
+            break;
           case "auth/invalid-email":
-            setErrorMessage("Invalid email.");
-            toast("Invalid email.");
+            toast.error("Invalid email.");
             break;
           case "auth/user-disabled":
-            setErrorMessage("Disabled email");
+            toast.error("Disabled email");
             break;
           case "auth/user-not-found":
-            setErrorMessage("User not found");
+            toast.error("User not found");
             break;
           case "auth/wrong-password":
-            setErrorMessage("Wrong password");
+            toast.error("Wrong password");
             break;
           default:
-            setErrorMessage("something went wrong");
+            toast.error("something went wrong");
+            console.log(errorCode);
             break;
         }
       }
@@ -126,7 +116,7 @@ export default function SignIn() {
           {/* <SignInWithGoogle customClass="mt-5" /> */}
           <div className="text-center py-4">
             <p className="text-sm font-medium">
-              Don't have an account?{" "}
+              {/* Don't have an account?{" "} */}
               <Link to="/sign-up" className="text-yellow">
                 Click here
               </Link>

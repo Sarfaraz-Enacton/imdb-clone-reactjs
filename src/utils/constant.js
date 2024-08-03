@@ -69,7 +69,6 @@ export const footerLinks = [
   },
 ];
 
-
 // functions
 // export const debounce = (callback, wait) => {
 //   // initialize the timer
@@ -93,7 +92,7 @@ export const footerLinks = [
 // Debounce function
 export const debounce = (callback, wait) => {
   let timer;
-  return function() {
+  return function () {
     clearTimeout(timer);
     timer = setTimeout(() => {
       callback.apply(this, arguments);
@@ -101,8 +100,7 @@ export const debounce = (callback, wait) => {
   };
 };
 
-
-export const userAtom  = atom({
+export const userAtom = atom({
   key: "user",
   default: null,
 });

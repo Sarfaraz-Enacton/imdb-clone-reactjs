@@ -1,10 +1,10 @@
-import React from "react";
 import Input from "../components/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import FromError from "../components/FromError";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const SignUp = Yup.object().shape({
@@ -34,7 +34,6 @@ export default function SignUp() {
     },
     validationSchema: SignUp,
     onSubmit: async (values) => {
-      // alert(JSON.stringify(values, null, 2));
       try {
         const userCredentials = await createUserWithEmailAndPassword(
           auth,
@@ -43,17 +42,18 @@ export default function SignUp() {
         );
         const user = userCredentials.user;
         console.log(user);
-        resetForm();
+        toast.success("signed up successfully");
+        window.location.href = "/";
+        // resetForm();
       } catch (error) {
         console.log(error.message);
         const errorCode = error.code;
         switch (errorCode) {
           case "auth/email-already-in-use":
-            setErrorMessage("email already in use");
-            toast("email already in use");
+            toast.error("email already in use");
             break;
           default:
-            setErrorMessage("something went wrong");
+            toast.error("something went wrong");
             break;
         }
       }

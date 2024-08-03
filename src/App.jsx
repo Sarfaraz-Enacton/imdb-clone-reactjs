@@ -5,25 +5,10 @@ import Home from "./screens/Home";
 import Preview from "./screens/Preview";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
-import { RecoilRoot, useRecoilState } from "recoil";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { userAtom } from "./utils/constant";
-import { auth } from "../firebase";
+import { Slide, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [user, setUser] = useRecoilState(userAtom);
-  console.log(user);
-
-  useEffect(() => {
-    // This function is called to set up the listener
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // Update the Recoil state with the current user
-    });
-
-    // Cleanup function to unsubscribe when the component unmounts
-    return () => unsubscribe();
-  }, []); // The dependency array should be empty to run the effect once on mount
   return (
     <>
       <BrowserRouter>
@@ -36,7 +21,12 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-      s{" "}
+      <ToastContainer
+        closeOnClick
+        pauseOnHover={false}
+        transition={Slide}
+        theme="dark"
+      />
     </>
   );
 }
