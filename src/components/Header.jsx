@@ -12,6 +12,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import useIsLoggedIn from "../utils/hooks/user-status";
+import { AppRoutes } from "../utils/routes-config";
 
 export default function Header() {
   const [navExpanded, setNavExpanded] = useState(false);
@@ -167,7 +168,7 @@ export default function Header() {
   const SignInButton = () => {
     return (
       <Link
-        to="/sign-in"
+        to={AppRoutes.signIn}
         className="flex items-center gap-1 px-3 rounded cursor-pointer hover:bg-primary/20 whitespace-nowrap"
       >
         <span>Sign In</span>
@@ -188,7 +189,7 @@ export default function Header() {
     <header className="py-3 bg-secondary-250">
       <nav className="container">
         <div className="flex gap-2 text-sm font-medium">
-          <Link to="/" className="block w-16 h-8 flex-shrink-0">
+          <Link to={AppRoutes.home} className="block w-16 h-8 flex-shrink-0">
             <img
               className="w-full h-auto"
               src="/logo.svg"

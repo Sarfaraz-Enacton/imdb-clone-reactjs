@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FromError from "../components/FromError";
-// import SignInWithGoogle from "../components/SignInWithGoogle";
+import SignInWithGoogle from "../components/SignInWithGoogle";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { AppRoutes } from "../utils/routes-config";
 
 export default function SignIn() {
   const SignInSchema = Yup.object().shape({
@@ -34,7 +35,7 @@ export default function SignIn() {
         console.log(userId);
         toast.success("Sign in successfully");
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = AppRoutes.home;
         }, 1000);
       } catch (error) {
         const errorCode = error.code;
@@ -82,7 +83,6 @@ export default function SignIn() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
-                  // autoComplete="username"
                   autoComplete="on"
                 />
                 {formik.touched.email && formik.errors.email ? (
@@ -97,7 +97,6 @@ export default function SignIn() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
-                  // autoComplete="current-password"
                   autoComplete="on"
                 />
                 {formik.touched.password && formik.errors.password ? (
@@ -113,11 +112,11 @@ export default function SignIn() {
               </button>
             </div>
           </form>
-          {/* <SignInWithGoogle customClass="mt-5" /> */}
+          <SignInWithGoogle />
           <div className="text-center py-4">
             <p className="text-sm font-medium">
-              {/* Don't have an account?{" "} */}
-              <Link to="/sign-up" className="text-yellow">
+              Do not have an account?{" "}
+              <Link to={AppRoutes.singUP} className="text-yellow">
                 Click here
               </Link>
             </p>

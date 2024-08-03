@@ -5,6 +5,7 @@ import FromError from "../components/FromError";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import { AppRoutes } from "../utils/routes-config";
 
 export default function SignUp() {
   const SignUp = Yup.object().shape({
@@ -42,18 +43,18 @@ export default function SignUp() {
         );
         const user = userCredentials.user;
         console.log(user);
-        toast.success("signed up successfully");
-        window.location.href = "/";
+        toast.success("Signed up successfully");
+        window.location.href = AppRoutes.home;
         // resetForm();
       } catch (error) {
         console.log(error.message);
         const errorCode = error.code;
         switch (errorCode) {
           case "auth/email-already-in-use":
-            toast.error("email already in use");
+            toast.error("Email already in use");
             break;
           default:
-            toast.error("something went wrong");
+            toast.error("Something went wrong");
             break;
         }
       }
