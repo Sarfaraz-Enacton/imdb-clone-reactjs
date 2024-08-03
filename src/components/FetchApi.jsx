@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { config } from "../config";
 
 export default function FetchApi(url) {
@@ -19,10 +19,8 @@ export default function FetchApi(url) {
 
         const response = await fetch(url, options);
         const json = await response.json();
-        // console.log(json);
         const data = json.results || json;
         setData(data);
-        // console.log(data);
       } catch (error) {
         console.log(error);
         setError(error);

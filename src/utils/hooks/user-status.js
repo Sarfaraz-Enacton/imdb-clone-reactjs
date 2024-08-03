@@ -17,7 +17,6 @@ const useIsLoggedIn = () => {
     });
     return unsubscribe;
   }, []);
-  console.log(isLoggedIn);
 
   return { isLoggedIn, loading };
 };

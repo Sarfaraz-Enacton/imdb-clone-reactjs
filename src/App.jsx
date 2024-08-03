@@ -7,6 +7,8 @@ import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PageNotFound from "./screens/PageNotFound";
+import { AppRoutes } from "./utils/routes-config";
 
 function App() {
   return (
@@ -14,10 +16,12 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path={AppRoutes.home} element={<Home />} />
           <Route path="/preview/:id" element={<Preview />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
+          <Route path={AppRoutes.signIn} element={<SignIn />} />
+          <Route path={AppRoutes.singUP} element={<SignUp />} />
+          <Route path="*" element={<PageNotFound />} />
+          <Route path={AppRoutes.notFound} element={<PageNotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -3,31 +3,22 @@ import FetchApi from "../components/FetchApi";
 import { config } from "../config";
 import noImagePlaceholder from "/noImagePlaceholder.svg";
 import SkeletonLoader from "../components/SkeletonLoader";
+import PageNotFound from "./PageNotFound";
+import { AppRoutes } from "../utils/routes-config";
 
 export default function Preview() {
   const { id } = useParams();
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const media_type = queryParams.get("type");
-  console.log(id);
-  console.log(media_type);
-  const { data, loading, error } = FetchApi(
+
+  if (!media_type || !["movie", "tv", "person"].includes(media_type)) {
+    window.location.href = AppRoutes.notFound;
+    return <PageNotFound />;
+  }
+  const { data, loading } = FetchApi(
     `${config.API_BASE_URL}${media_type}/${id}`
   );
-  // console.log(`${config.API_BASE_URL}${media_type}/${id}`);
-  // console.log(previewData);
-  // console.log({ data });
-  // console.log(data.genres);
-  // if (data) {
-  // const RenderGenres = data.genres.map((genre) => (
-  //   <button
-  //     key={index}
-  //     className="border border-primary/70 rounded-full py-1 px-2 sm:px-3 text-xs sm:text-base"
-  //   >
-  //     {genre.name}
-  //   </button>
-  // ));
-  // }
 
   return (
     <main>
