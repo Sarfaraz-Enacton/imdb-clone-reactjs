@@ -8,6 +8,7 @@ const useIsLoggedIn = () => {
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
       if (user) {
         setIsLoggedIn(true);
       } else {

@@ -10,7 +10,11 @@ export default function MainCard({ data, type }) {
         <div className="w-full min-h-[250px] relative">
           <img
             className="w-full h-full object-cover cursor-pointer transition ease-in-out duration-300 hover:opacity-90"
-            src={config.IMG_BASE_URL + data.poster_path}
+            src={
+              config.images.secure_base_url +
+              config.images.poster_sizes[2] +
+              data.poster_path
+            }
             alt={data.title || data.name}
             loading="lazy"
           />

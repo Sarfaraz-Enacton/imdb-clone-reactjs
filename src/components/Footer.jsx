@@ -70,7 +70,7 @@ export default function Footer() {
           <img
             className="max-h-[18px]"
             src="/amazon-logo.svg"
-            alt=""
+            alt="logo"
             height={18}
             width={160}
           />

@@ -10,7 +10,7 @@ export default function UpcomingCard({ data }) {
         <div className="max-w-[88px] flex-shrink-0 relative w-full">
           <img
             className="h-full w-full object-cover"
-            src={config.IMG_BASE_URL + data.poster_path}
+            src={config.images.secure_base_url  + config.images.poster_sizes[1] + data.poster_path}
             alt={data.title}
             loading="lazy"
           />

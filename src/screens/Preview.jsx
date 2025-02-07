@@ -41,7 +41,9 @@ export default function Preview() {
                     className="w-full h-full object-cover"
                     src={
                       data.poster_path
-                        ? config.IMG_BASE_URL + data?.poster_path
+                        ? config.images.secure_base_url +
+                          config.images.poster_sizes[3] +
+                          data?.poster_path
                         : noImagePlaceholder
                     }
                     alt={data.title || data.name}
@@ -52,7 +54,9 @@ export default function Preview() {
                     className="w-full h-full object-cover"
                     src={
                       data.poster_path
-                        ? config.IMG_BASE_URL + data.backdrop_path
+                        ? config.images.secure_base_url +
+                          config.images.backdrop_sizes[1] +
+                          data.backdrop_path
                         : noImagePlaceholder
                     }
                     alt={data.title || data.name}
@@ -65,7 +69,7 @@ export default function Preview() {
                     className="w-full h-full object-cover"
                     src={
                       data.poster_path
-                        ? config.IMG_BASE_URL + data.poster_path
+                        ? config.images.secure_base_url + config.images.poster_sizes[1] + data.poster_path
                         : noImagePlaceholder
                     }
                     alt={data.title || data.name}

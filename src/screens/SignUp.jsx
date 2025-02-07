@@ -2,7 +2,7 @@ import Input from "../components/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import FromError from "../components/FromError";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { AppRoutes } from "../utils/routes-config";
@@ -35,16 +35,24 @@ export default function SignUp() {
     },
     validationSchema: SignUp,
     onSubmit: async (values) => {
+      let displayName = values.firstName + " " + values.lastName;
+      displayName = displayName ? displayName : values.email.split("@")[0];
       try {
         const userCredentials = await createUserWithEmailAndPassword(
           auth,
           values.email,
-          values.confirmPassword
+          values.confirmPassword,
+          displayName
         );
         const user = userCredentials.user;
+        await updateProfile(user, {
+          displayName: displayName,
+        });
         console.log(user);
         toast.success("Signed up successfully");
-        window.location.href = AppRoutes.home;
+        setTimeout(() => {
+          window.location.href = AppRoutes.home;
+        }, 3000);
         // resetForm();
       } catch (error) {
         console.log(error.message);

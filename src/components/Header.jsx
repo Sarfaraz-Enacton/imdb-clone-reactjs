@@ -42,7 +42,7 @@ export default function Header() {
               <img
                 className="w-full h-auto"
                 src="/logo.svg"
-                alt=""
+                alt="logo"
                 width={64}
                 height={32}
               />
@@ -193,7 +193,7 @@ export default function Header() {
             <img
               className="w-full h-auto"
               src="/logo.svg"
-              alt=""
+              alt="logo"
               width={64}
               height={32}
             />

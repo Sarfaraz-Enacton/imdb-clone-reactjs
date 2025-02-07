@@ -10,7 +10,7 @@ export default function MainSlider({ data, type }) {
     <Swiper
       modules={[Navigation, Autoplay]}
       navigation={true}
-      loop={true}
+      // loop={true}
       spaceBetween={24}
       breakpoints={{
         0: {

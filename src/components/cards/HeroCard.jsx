@@ -11,7 +11,7 @@ export default function HeroCard({ data }) {
         <div className="relative w-full h-full object-cover pb-16">
           <img
             className="w-full h-full object-cover cursor-pointer transition ease-in-out duration-300 hover:opacity-90 hero-bg-wrapper"
-            src={config.IMG_BASE_URL + data.backdrop_path}
+            src={config.images.secure_base_url + config.images.backdrop_sizes[2] + data.backdrop_path}
             alt={data.title}
             height={450}
             width={830}
@@ -23,7 +23,7 @@ export default function HeroCard({ data }) {
           <div className="max-w-[90px] md:max-w-[130px] xl:max-w-[165px] relative">
             <img
               className="w-full h-full object-cover transition ease-in-out duration-300 hover:opacity-90 cursor-pointer"
-              src={config.IMG_BASE_URL + data.poster_path}
+              src={config.images.secure_base_url + config.images.poster_sizes[2] + data.poster_path}
               alt={data.title}
             />
             <div className="swiper-lazy-preloader"></div>

@@ -3,4 +3,5 @@ export const AppRoutes = {
   signIn: "/sign-in",
   singUP: "/sign-up",
   notFound: "/not-found",
+  categories: "/categories",
 };

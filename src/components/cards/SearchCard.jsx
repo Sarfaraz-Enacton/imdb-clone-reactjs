@@ -12,7 +12,9 @@ export default function SearchCard({ data, onClick }) {
             className="w-full h-full object-cover"
             src={
               data.poster_path
-                ? config.IMG_BASE_URL + data.poster_path
+                ? config.images.secure_base_url +
+                  config.images.poster_sizes[1] +
+                  data.poster_path
                 : "/noImagePlaceholder.svg"
             }
             alt={data.name}
